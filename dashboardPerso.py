@@ -6,6 +6,7 @@ import plotly.graph_objects as go
 import matplotlib.pyplot as plt
 import numpy as np
 import os 
+import searborn as sns
 
 import warnings
 warnings.filterwarnings("ignore")
