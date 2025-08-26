@@ -6,7 +6,6 @@ import plotly.graph_objects as go
 import matplotlib.pyplot as plt
 import numpy as np
 import os 
-import searborn as sns
 
 import warnings
 warnings.filterwarnings("ignore")
@@ -14,7 +13,7 @@ warnings.filterwarnings("ignore")
 st.set_page_config(page_title="Super store", page_icon=":bar_chart:", layout="wide")
 
 #os.chdir(r"C:\Users\User\Desktop\data analysis\personnel")
-df=pd.read_csv("cancer patient data sets.csv")
+df=pd.read_csv("datacancer.csv")
  
 st.sidebar.title("Navigation")
 page = st.sidebar.radio("choisissez votre page :", ("Accueil","Analyse","Prediction","Traitement"))
@@ -216,9 +215,35 @@ elif page=="Prediction":
     if st.button("probabilite d'obtention du cancer"):
         data= np.array([[alcool,alimentation,fumeur,allergy,essouflement,thoracique,maladie,air,toux,risque_genetique,passif,risque_prof,fatigue,obesite]])
 
-        predict= model.predict_proba(data)[0][1]*100
+        predict= model.predict_proba(data)[0][2]*100
 
         st.success(f"la probabilite d'avoir le cancer est de {predict:.2f}%")
+        
+        fig = go.Figure(go.Indicator(
+        mode="gauge+number",
+        value= predict,
+        gauge={
+            "axis": {"range": [0, 100], "tickwidth": 1, "tickcolor": "black"},
+            "bar": {"color": "green"},
+            "bgcolor": "white",
+            "borderwidth": 2,
+            "bordercolor": "gray",
+            'shape': "angular",
+            "steps": [
+                {"range": [0, 50], "color": "lightgray"},
+                {"range": [50, 100], "color": "lightgreen"},
+                ],
+            },
+            domain={'x': [0, 1], 'y': [0, 1]},
+        ))
+
+        # Limiter l’affichage au demi-cercle (180°)
+        fig.update_layout(
+            margin=dict(t=0, b=0, l=0, r=0),
+            height=300
+        )
+
+        st.plotly_chart(fig)
 
 
 
