@@ -6,7 +6,6 @@ import plotly.graph_objects as go
 import matplotlib.pyplot as plt
 import numpy as np
 import os 
-import searborn as sns
 
 import warnings
 warnings.filterwarnings("ignore")
@@ -14,7 +13,7 @@ warnings.filterwarnings("ignore")
 st.set_page_config(page_title="Super store", page_icon=":bar_chart:", layout="wide")
 
 #os.chdir(r"C:\Users\User\Desktop\data analysis\personnel")
-df=pd.read_csv("cancer patient data sets.csv")
+df=pd.read_csv("datacancer.csv")
  
 st.sidebar.title("Navigation")
 page = st.sidebar.radio("choisissez votre page :", ("Accueil","Analyse","Prediction","Traitement"))
