@@ -215,7 +215,7 @@ elif page=="Prediction":
     if st.button("probabilite d'obtention du cancer"):
         data= np.array([[alcool,alimentation,fumeur,allergy,essouflement,thoracique,maladie,air,toux,risque_genetique,passif,risque_prof,fatigue,obesite]])
 
-        predict= model.predict_proba(data)[0][1]*100
+        predict= model.predict_proba(data)[0][2]*100
 
         st.success(f"la probabilite d'avoir le cancer est de {predict:.2f}%")
         
