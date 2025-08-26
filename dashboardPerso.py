@@ -218,6 +218,32 @@ elif page=="Prediction":
         predict= model.predict_proba(data)[0][1]*100
 
         st.success(f"la probabilite d'avoir le cancer est de {predict:.2f}%")
+        
+        fig = go.Figure(go.Indicator(
+        mode="gauge+number",
+        value= predict,
+        gauge={
+            "axis": {"range": [0, 100], "tickwidth": 1, "tickcolor": "black"},
+            "bar": {"color": "green"},
+            "bgcolor": "white",
+            "borderwidth": 2,
+            "bordercolor": "gray",
+            'shape': "angular",
+            "steps": [
+                {"range": [0, 50], "color": "lightgray"},
+                {"range": [50, 100], "color": "lightgreen"},
+                ],
+            },
+            domain={'x': [0, 1], 'y': [0, 1]},
+        ))
+
+        # Limiter l’affichage au demi-cercle (180°)
+        fig.update_layout(
+            margin=dict(t=0, b=0, l=0, r=0),
+            height=300
+        )
+
+        st.plotly_chart(fig)
 
 
 
